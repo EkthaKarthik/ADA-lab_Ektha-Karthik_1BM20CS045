@@ -66,7 +66,7 @@ y = 0;
 }
 
 void bs(){
-    int i,j,n,temp;
+    int i,j,n,x,temp,key;
    
     printf ("Enter the number of elements in the array : ");
     scanf ("%d", &n);
@@ -89,12 +89,36 @@ void bs(){
             }
         }
 }
+ printf("The elements are:");
+   for (i=0; i < n; i++)
+        printf("%d ", arr[i]);
+printf ("\nEnter the integer you want to search");
+  scanf ("\n%d", &key);
+ 
+int binarySearch(int array[], int x, int low, int high) {
+  if (high >= low) {
+    int mid = low + (high - low) / 2;
 
- printf("\nSorted array is : ");
-    for (int i = 0; i < n; i++)
-    {
-      printf("\n%d",arr[i]);
-    }
+    // If found at mid, then return it
+    if (array[mid] == x)
+      return mid;
+
+    // Search the left half
+    if (array[mid] > x)
+      return binarySearch(array, x, low, mid - 1);
+
+    // Search the right half
+    return binarySearch(array, x, mid + 1, high);
+  }
+
+  return -1;
+}
+ int result = binarySearch(arr, x, 0, n - 1);
+if (result == -1)
+    printf("Not found");
+  else
+    printf("Element is found at index %d", result);
+   
    
     end = clock();
     double time_taken = ((double)(end-start))/CLOCKS_PER_SEC;
